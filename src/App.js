@@ -41,12 +41,22 @@ const App = () => {
     );
   };
 
+  const searchPosts = () => {
+    //  Search For Posts
+    const normalizedTerm = searchTerm.trim().toLowerCase();
+    console.log(normalizedTerm);
+    if (!normalizedTerm) return posts;
+    return posts.filter((post) => {
+      return post.username.toLowerCase().includes(normalizedTerm);
+    });
+  };
+
   return (
     <div className="App">
       {/* Add SearchBar and Posts here to render them */}
-      <SearchBar />
+      <SearchBar setSearchTerm={setSearchTerm} />
       {/* Check the implementation of each component, to see what props they require, if any! */}
-      <Posts posts={posts} likePost={likePost} />
+      <Posts posts={searchPosts()} likePost={likePost} />
     </div>
   );
 };
